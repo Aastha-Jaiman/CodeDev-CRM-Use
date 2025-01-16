@@ -56,7 +56,7 @@ app.use(cookieParser());
 // );
 app.use(
   cors({
-    origin: ["*", "https://codedev-crm-use.onrender.com"],
+    origin: ["https://codedev-crm-use.onrender.com"],
     credentials: true, // Allow cookies
   })
 );
