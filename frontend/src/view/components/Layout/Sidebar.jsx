@@ -136,6 +136,12 @@ const AdminSidebar = ({ handleLogout, location }) => {
             text="Query"
             location={location}
           />
+          <SidebarItem
+            to="/adminTaskAssign"
+            icon={<MdQueryBuilder />}
+            text="Task Assign"
+            location={location}
+          />
         </ul>
       </nav>
 
@@ -266,6 +272,14 @@ const SubAdminSidebar = ({ handleLogout, location, user }) => {
               location={location}
             />
           )}
+          {/* {user.permission?.AdminTaskAssign?.read && (
+            <SidebarItem
+              to="/AdminTaskAssign"
+              icon={<MdQueryBuilder />}
+              text="AdminTaskAssign"
+              location={location}
+            />
+          )} */}
         </ul>
       </nav>
 
@@ -303,6 +317,12 @@ const EmployeeSidebar = ({ handleLogout, location, user }) => {
             to="/todo"
             icon={<FaClipboardList />}
             text="To-Do"
+            location={location}
+          />
+          <SidebarItem
+            to="/UserTaskAssign"
+            icon={<FaClipboardList />}
+            text="Assigned Task"
             location={location}
           />
           {user.permission?.lead?.read && (

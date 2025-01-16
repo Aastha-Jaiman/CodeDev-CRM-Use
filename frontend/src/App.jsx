@@ -21,6 +21,8 @@ import UserVerification from "./view/pages/UserVerification";
 import Home from "./view/screens/Home";
 import MainLayout from "./view/components/Layout/MainLayout";
 import QueryPage from "./view/pages/Query";
+import AdminTaskAssign from "./view/pages/AdminTaskAssign";
+import UserTaskAssign from "./view/pages/UserTaskAssign";
 import Lead from "./view/pages/Lead";
 import LeadDetails from "./view/pages/LeadDetails";
 import Teams from "./view/pages/Teams";
@@ -187,6 +189,22 @@ function App() {
               }
             />
             <Route
+              path="/AdminTaskAssign"
+              element={
+                <Layout>
+                  <AdminTaskAssign />
+                </Layout>
+              }
+            />
+            <Route
+              path="/UserTaskAssign"
+              element={
+                <Layout>
+                  <UserTaskAssign />
+                </Layout>
+              }
+            />
+            <Route
               path="/meetingmanagement"
               element={
                 <Layout>
@@ -242,6 +260,7 @@ function App() {
                 </Layout>
               }
             />
+            
 
             {/* Public routes */}
             {/* <Route path="/contactus" element={<ContactUs />} /> */}

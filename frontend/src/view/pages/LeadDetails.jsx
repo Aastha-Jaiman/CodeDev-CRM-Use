@@ -186,9 +186,9 @@ const LeadDetails = () => {
             <p className="text-xl text-gray-700">
               <strong>Current Stage:</strong> {lead.currentStage}
             </p>
-            <p className="text-xl text-gray-700">
+            {/* <p className="text-xl text-gray-700">
               <strong>Team:</strong> {lead.team}
-            </p>
+            </p> */}
             {/* <p className="text-xl text-gray-700">
               <strong>Assigned To:</strong>{" "}
               {lead.assignedTo?.name || "Not Assigned"}

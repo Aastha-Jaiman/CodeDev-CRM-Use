@@ -21,7 +21,8 @@ const attendanceRoutes  =  require("./routes/attendanceRoutes")
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const session = require("express-session");
-const googleAuth = require("./routes/googleAuthRoutes")
+const googleAuth = require("./routes/googleAuthRoutes");
+const taskRoutes = require("./routes/taskRoutes");
 const path = require("path")
 
 require("dotenv").config();
@@ -40,25 +41,25 @@ app.use(cookieParser());
 // });
 
 
-app.use(
-  cors({
-    origin: [ "http://localhost:3000", "https://codedev-crm-5fa3.onrender.com"],
-    credentials: true,  
-  })
-);
-
 // app.use(
 //   cors({
-//     origin: ["http://localhost:5173"],
+//     origin: [ "http://localhost:3000", "https://codedev-crm-5fa3.onrender.com"],
 //     credentials: true,  
 //   })
 // );
+
 // app.use(
 //   cors({
-//     origin: ["http://localhost:5173", "https://crm-deploy-pivx.onrender.com"],
-//     credentials: true, // Allow cookies
+//     origin: ["http://localhost:5174"],
+//     credentials: true,  
 //   })
 // );
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://crm-deploy-pivx.onrender.com"],
+    credentials: true, // Allow cookies
+  })
+);
 app.use(
   session({
     secret: "secret",
@@ -88,9 +89,10 @@ app.use("/api/project", projectRoutes);
 app.use("/api/meeting", meetingRoutes);
 app.use("/api/dashboard", dashboardRoutes)
 app.use("/api/attendance",attendanceRoutes);
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-});
+app.use("/api/taskRoutes",taskRoutes);
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+// });
 
 app.listen(PORT, async () => {
   await connectDB(URL);
