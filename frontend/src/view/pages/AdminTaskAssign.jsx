@@ -12,12 +12,12 @@ const AdminTaskAssignmentForm = () => {
     createdBy: "", // Add createdBy field
     status: "pending",
     date: "",
-    dueDate: "", // Add due date for filtering purposes
+    currentDate: "", // Replace dueDate with currentDate
   });
 
   const [users, setUsers] = useState([]);
   const [tasks, setTasks] = useState([]);
-  const [filter, setFilter] = useState("today"); // Default filter is 'today'
+  const [filter, setFilter] = useState("all"); // Default filter is 'all'
   const [selectedDate, setSelectedDate] = useState(new Date()); // For Calendar Date Picker
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const AdminTaskAssignmentForm = () => {
     try {
       const updatedTaskData = {
         ...taskData,
-        date: taskData.dueDate, // Ensure that date is assigned correctly
+        date: taskData.currentDate, // Ensure that date is assigned correctly
       };
 
       if (taskData._id) {
@@ -72,7 +72,7 @@ const AdminTaskAssignmentForm = () => {
         createdBy: "", // Reset createdBy
         status: "pending",
         date: "", // Reset date
-        dueDate: "", // Reset due date
+        currentDate: "", // Reset currentDate
       });
       fetchTasks();
     } catch (error) {
@@ -95,7 +95,7 @@ const AdminTaskAssignmentForm = () => {
     setTaskData(task);
   };
 
-  // Function to filter tasks based on the selected filter (Today, tomorrow, or Calendar date)
+  // Function to filter tasks based on the selected filter (All, Today, Tomorrow, etc.)
   const getFilteredTasks = () => {
     const now = new Date();
     let filteredTasks = tasks;
@@ -104,16 +104,13 @@ const AdminTaskAssignmentForm = () => {
       const yesterday = new Date(now);
       yesterday.setDate(now.getDate() - 1);
       filteredTasks = tasks.filter((task) => isSameDay(new Date(task.date), yesterday));
-    }
-    else if (filter === "today") {
+    } else if (filter === "today") {
       filteredTasks = tasks.filter((task) => isSameDay(new Date(task.date), now));
-    }
-    else if (filter === "tomorrow") {
+    } else if (filter === "tomorrow") {
       const tomorrow = new Date(now);
       tomorrow.setDate(now.getDate() + 1);
       filteredTasks = tasks.filter((task) => isSameDay(new Date(task.date), tomorrow));
-    }
-    else if (filter === "calendar") {
+    } else if (filter === "calendar") {
       filteredTasks = tasks.filter((task) => isSameDay(new Date(task.date), selectedDate));
     }
 
@@ -203,18 +200,17 @@ const AdminTaskAssignmentForm = () => {
             </div>
 
             <div className="mb-4 w-full">
-              <label className="block text-sm font-medium text-gray-700">Due Date</label>
+              <label className="block text-sm font-medium text-gray-700">Current Date</label>
               <input
                 type="date"
-                name="dueDate"
-                value={taskData.dueDate}
+                name="currentDate"
+                value={taskData.currentDate}
                 onChange={handleChange}
                 required
                 className="w-full p-3 mt-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>
-
 
           {/* Submit Button */}
           <button
@@ -233,6 +229,12 @@ const AdminTaskAssignmentForm = () => {
 
           <div className="">
             {/* Filter buttons */}
+            <button
+              onClick={() => setFilter("all")}
+              className={`mx-2 mb-6 p-2 rounded-md ${filter === "all" ? 'bg-[#002E6E]' : 'bg-blue-500'} text-white`}
+            >
+              All
+            </button>
             <button
               onClick={() => setFilter("yesterday")}
               className={`mx-2 mb-6 p-2 rounded-md ${filter === "yesterday" ? 'bg-[#002E6E]' : 'bg-blue-500'} text-white`}
@@ -268,7 +270,6 @@ const AdminTaskAssignmentForm = () => {
               </div>
             )}
           </div>
-
         </div>
 
         <table className="min-w-full table-auto border-collapse">

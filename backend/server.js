@@ -48,18 +48,18 @@ app.use(cookieParser());
 //   })
 // );
 
-// app.use(
-//   cors({
-//     origin: ["http://localhost:5174"],
-//     credentials: true,  
-//   })
-// );
 app.use(
   cors({
-    origin: ["https://codedev-crm-use.onrender.com"],
-    credentials: true, // Allow cookies
+    origin: ["http://localhost:5173","https://codedev-crm-use.onrender.com"],
+    credentials: true,  
   })
 );
+// app.use(
+//   cors({
+//     origin: ["https://codedev-crm-use.onrender.com", "http://localhost:3000"],
+//     credentials: true, // Allow cookies
+//   })
+// );
 app.use(
   session({
     secret: "secret",
