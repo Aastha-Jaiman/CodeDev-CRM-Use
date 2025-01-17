@@ -90,9 +90,9 @@ app.use("/api/meeting", meetingRoutes);
 app.use("/api/dashboard", dashboardRoutes)
 app.use("/api/attendance",attendanceRoutes);
 app.use("/api/taskRoutes",taskRoutes);
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
 
 app.listen(PORT, async () => {
   await connectDB(URL);
