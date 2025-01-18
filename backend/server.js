@@ -1,4 +1,3 @@
-
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -16,22 +15,22 @@ const clientRoutes = require("./routes/clientRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const meetingRoutes = require("./routes/meetingRoutes");
 const contactRoutes = require("./routes/contactRoutes");
-const dashboardRoutes = require("./routes/dashboardRoutes")
-const attendanceRoutes  =  require("./routes/attendanceRoutes")
+const dashboardRoutes = require("./routes/dashboardRoutes");
+const attendanceRoutes = require("./routes/attendanceRoutes");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const session = require("express-session");
 const googleAuth = require("./routes/googleAuthRoutes");
 const taskRoutes = require("./routes/taskRoutes");
-const path = require("path")
+const workReportRoutes = require("./routes/workReportRoutes");
+const path = require("path");
 
 require("dotenv").config();
 
 const URL = process.env.DB_URL;
 const PORT = process.env.PORT || 3000;
 
-
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -40,18 +39,17 @@ app.use(cookieParser());
 //   next();
 // });
 
-
 // app.use(
 //   cors({
 //     origin: [ "http://localhost:3000", "https://codedev-crm-5fa3.onrender.com"],
-//     credentials: true,  
+//     credentials: true,
 //   })
 // );
 
 app.use(
   cors({
-    origin: ["http://localhost:5173","https://codedev-crm-use.onrender.com"],
-    credentials: true,  
+    origin: ["http://localhost:5173", "https://codedev-crm-use.onrender.com"],
+    credentials: true,
   })
 );
 // app.use(
@@ -71,10 +69,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-const GoogleStrategy = require("./possport")
+const GoogleStrategy = require("./possport");
 
-
-app.use("/auth", googleAuth)
+app.use("/auth", googleAuth);
 app.use("/api/auth", authRoutes);
 app.use("/api/todo", todoRoutes);
 app.use("/api/profile", userRoutes);
@@ -87,11 +84,12 @@ app.use("/api/team", teamRoutes);
 app.use("/api/client", clientRoutes);
 app.use("/api/project", projectRoutes);
 app.use("/api/meeting", meetingRoutes);
-app.use("/api/dashboard", dashboardRoutes)
-app.use("/api/attendance",attendanceRoutes);
-app.use("/api/taskRoutes",taskRoutes);
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/attendance", attendanceRoutes);
+app.use("/api/taskRoutes", taskRoutes);
+app.use("/api/workreports", workReportRoutes);
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
 app.listen(PORT, async () => {
