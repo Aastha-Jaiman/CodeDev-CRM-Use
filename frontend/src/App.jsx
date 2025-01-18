@@ -37,6 +37,7 @@ import ClientInfo from "./view/pages/ClientInfo";
 import AttendanceDashboard from "./view/pages/AttendanceDashboard";
 import TeamAttendance from "./view/pages/TeamAttendance";
 import UserTasksDashboard from "./view/pages/AllUserTodos";
+import WorkReport from "./view/pages/WorkReport";
 function App() {
   return (
     <ToastProvider>
@@ -193,6 +194,14 @@ function App() {
               element={
                 <Layout>
                   <AdminTaskAssign />
+                </Layout>
+              }
+            />
+            <Route
+              path="/WorkReport"
+              element={
+                <Layout>
+                  <WorkReport />
                 </Layout>
               }
             />

@@ -142,6 +142,12 @@ const AdminSidebar = ({ handleLogout, location }) => {
             text="Task Assign"
             location={location}
           />
+          <SidebarItem
+            to="/workReport"
+            icon={<MdQueryBuilder />}
+            text="Work Report"
+            location={location}
+          />
         </ul>
       </nav>
 
@@ -323,6 +329,12 @@ const EmployeeSidebar = ({ handleLogout, location, user }) => {
             to="/UserTaskAssign"
             icon={<FaClipboardList />}
             text="Assigned Task"
+            location={location}
+          />
+          <SidebarItem
+            to="/workReport"
+            icon={<MdQueryBuilder />}
+            text="Work Report"
             location={location}
           />
           {user.permission?.lead?.read && (
