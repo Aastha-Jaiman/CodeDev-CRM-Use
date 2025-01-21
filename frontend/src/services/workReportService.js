@@ -6,7 +6,12 @@ const workReportService = {
   // Create a work report
   createWorkReport: async (data) => {
     try {
-      const response = await api.post('/workreports/create', data);  // Use the existing POST method from api.js
+      // Only task, date, and state are required for creating a work report
+      const response = await api.post('/workreports/create', {
+        task: data.task,
+        date: data.date,
+        state: data.state,
+      });
       return response.data;
     } catch (error) {
       console.error('Error creating work report:', error);
@@ -49,3 +54,5 @@ const workReportService = {
 };
 
 export default workReportService;
+
+

@@ -38,6 +38,7 @@ import AttendanceDashboard from "./view/pages/AttendanceDashboard";
 import TeamAttendance from "./view/pages/TeamAttendance";
 import UserTasksDashboard from "./view/pages/AllUserTodos";
 import WorkReport from "./view/pages/WorkReport";
+import ShowWorkReports from "./view/pages/ShowWorkReports";
 function App() {
   return (
     <ToastProvider>
@@ -202,6 +203,14 @@ function App() {
               element={
                 <Layout>
                   <WorkReport />
+                </Layout>
+              }
+            />
+            <Route
+              path="/ShowWorkReports"
+              element={
+                <Layout>
+                  <ShowWorkReports />
                 </Layout>
               }
             />

@@ -2,15 +2,22 @@ const WorkReport = require("../models/workReportModels");
 
 const createWorkReport = async (req, res) => {
   try {
-    console.log("req.body", req.body)
-    const { task, conclusion, date ,state} = req.body;
-    
+    const { task, date, state } = req.body;
+
+    // Validate required fields for creating a task
+    if (!task || !date || !state) {
+      return res.status(400).json({
+        success: false,
+        message: "Task title, date, and status are required."
+      });
+    }
+
+    // Create a new work report
     const workReport = await WorkReport.create({
-      user: req.user._id,
-      title:task,
-      description:conclusion,
+      user: req.user._id, // Automatically associate with logged-in user
+      title: task,
       scheduledOn: new Date(date),
-      status:state
+      status: state
     });
 
     res.status(201).json({
@@ -30,7 +37,7 @@ const createWorkReport = async (req, res) => {
 
 const updateWorkReport = async (req, res) => {
   try {
-    const { title, description, scheduledOn, conclusion, status } = req.body;
+    const {task, scheduledOn, conclusion, state } = req.body;
     const reportId = req.params.id;
 
     const workReport = await WorkReport.findById(reportId);
@@ -53,11 +60,10 @@ const updateWorkReport = async (req, res) => {
     const updatedReport = await WorkReport.findByIdAndUpdate(
       reportId,
       {
-        title,
-        description,
+        title:task,
+        description:conclusion,
         scheduledOn: scheduledOn ? new Date(scheduledOn) : workReport.scheduledOn,
-        conclusion,
-        status
+        status:state
       },
       { new: true }
     );
@@ -125,4 +131,6 @@ module.exports = {
   getUserWorkReports,
   getAllWorkReports
 };
+
+
 

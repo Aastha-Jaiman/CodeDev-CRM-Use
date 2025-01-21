@@ -148,6 +148,12 @@ const AdminSidebar = ({ handleLogout, location }) => {
             text="Work Report"
             location={location}
           />
+          <SidebarItem
+            to="/showWorkReports"
+            icon={<MdQueryBuilder />}
+            text="Show Work Report"
+            location={location}
+          />
         </ul>
       </nav>
 
@@ -172,11 +178,10 @@ const SidebarItem = ({ to, icon, text, location }) => {
     <li>
       <NavLink
         to={to}
-        className={`flex items-center p-3 space-x-2 rounded ${
-          isActive
+        className={`flex items-center p-3 space-x-2 rounded ${isActive
             ? "bg-gray-700 text-white"
             : "text-gray-300 hover:bg-gray-700"
-        }`}
+          }`}
       >
         <div>{icon}</div>
         <div>{text}</div>
