@@ -142,12 +142,12 @@ const AdminSidebar = ({ handleLogout, location }) => {
             text="Task Assign"
             location={location}
           />
-          <SidebarItem
+          {/* <SidebarItem
             to="/workReport"
             icon={<MdQueryBuilder />}
             text="Work Report"
             location={location}
-          />
+          /> */}
           <SidebarItem
             to="/showWorkReports"
             icon={<MdQueryBuilder />}
