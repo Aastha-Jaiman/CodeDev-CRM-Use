@@ -2,8 +2,8 @@ import axios from "axios";
 
 // Create an Axios instance with base URL
 const api = axios.create({
-  // baseURL: "https://codedev-crm-use.onrender.com/api" ,
-  baseURL: "http://localhost:3000/api"  ,
+  baseURL: "https://codedev-crm-use.onrender.com/api" ,
+  // baseURL: "http://localhost:3000/api"  ,
   withCredentials: true,
 });
 //  ||"https://codedev-crm-use.onrender.com/api"
