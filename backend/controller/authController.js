@@ -724,8 +724,8 @@ exports.googleUser = async (req, res)=>{
         res.s = true;
         return res.redirect('/login')
       }
-      generateToken(userData._id, res);
-      return res.redirect('/dashboard')
+      generateToken(userData?._id, res);
+      return res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
     }
     const createUserData = await user.create({name, email: emails[0].value, signupMode: "google", profileImage: photos[0].value})
     
