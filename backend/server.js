@@ -69,7 +69,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// const GoogleStrategy = require("./possport");
+const GoogleStrategy = require("./possport");
 
 app.use("/auth", googleAuth);
 app.use("/api/auth", authRoutes);
