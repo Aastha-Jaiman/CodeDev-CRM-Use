@@ -6,7 +6,7 @@ passport.use(
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "https://code-dev-crm.onrender.com/auth/google/callback",
+        callbackURL: `${process.env.BACKEND_URL}/auth/google/callback`,
         scope: ['profile', 'email'] // Request access to user's profile and email
       },
       (accessToken, refreshToken, profile, done) => {

@@ -48,7 +48,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://codedev-crm-use.onrender.com"],
+    origin: ["http://localhost:5173", "http://localhost:5174", "https://codedev-crm-use.onrender.com"],
     credentials: true,
   })
 );

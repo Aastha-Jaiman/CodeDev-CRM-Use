@@ -21,5 +21,13 @@ router.get("/failureRedirect", (req,res)=>{
   router.get(
     "/google/callback",passport.authenticate("google", { failureRedirect: "/failureRedirect" }),googleUser);
 
+  router.get(
+    '/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/failureRedirect' }),
+    (req, res) => {
+      res.redirect(`${process.env.FRONTEND_URL}/dashboard`); // Redirect to frontend after login
+    }
+  );
+
 
 module.exports = router;
