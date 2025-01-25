@@ -4,7 +4,9 @@ import React from 'react';
 const Googlebutton = (props) => {
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:3000/auth/google';
+    // window.location.href = 'http://localhost:3000/auth/google';
+    window.location.href = 'https://codedev-crm-use.onrender.com/auth/google';
+
   };
 
 
