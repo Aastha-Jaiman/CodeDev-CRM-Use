@@ -44,7 +44,7 @@ const workReportService = {
   // Get all work reports (admin-only route)
   getAllWorkReports: async () => {
     try {
-      const response = await api.get('/workreport/all-reports');  // Use the existing GET method from api.js
+      const response = await api.get('/workreports/all-reports');  // Use the existing GET method from api.js
       return response.data;
     } catch (error) {
       console.error('Error fetching all work reports:', error);

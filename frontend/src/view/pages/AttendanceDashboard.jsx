@@ -10,7 +10,7 @@ const AttendanceDashboard = () => {
   const [detailedAttendance, setDetailedAttendance] = useState([]);
   const [sortConfig, setSortConfig] = useState({
     key: null,
-    direction: 'ascending'
+    direction: "ascending",
   });
   const navigate = useNavigate();
 
@@ -23,24 +23,26 @@ const AttendanceDashboard = () => {
       setLoading(true);
       const [teamsResponse, membersResponse] = await Promise.all([
         attendanceService.getAllTeamsAttendance(selectedDate),
-        attendanceService.getAllMembersAttendance(selectedDate)
+        attendanceService.getAllMembersAttendance(selectedDate),
       ]);
-      
+
+      console.log("membersResponse", membersResponse);
+
       setTeamsData(teamsResponse);
-      const transformedAttendance = membersResponse.members.map(member => ({
-        teamName: member.team?.name || 'Unassigned',
+      const transformedAttendance = membersResponse.members.map((member) => ({
+        teamName: member.team?.name || "Unassigned",
         userId: {
-          name: member.name
+          name: member.name,
         },
         checkIn: {
-          time: member.attendance.checkIn
+          time: member.attendance.checkIn,
         },
         checkOut: {
-          time: member.attendance.checkOut
+          time: member.attendance.checkOut,
         },
         status: member.attendance.status,
         leaveReason: member.attendance.leaveReason,
-        notes: member.attendance.notes
+        notes: member.attendance.notes,
       }));
       setDetailedAttendance(transformedAttendance);
     } catch (error) {
@@ -53,8 +55,8 @@ const AttendanceDashboard = () => {
   const formatTime = (dateString) => {
     if (!dateString) return "-";
     return new Date(dateString).toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit'
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -65,9 +67,9 @@ const AttendanceDashboard = () => {
   };
 
   const handleSort = (key) => {
-    let direction = 'ascending';
-    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
-      direction = 'descending';
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
     }
     setSortConfig({ key, direction });
   };
@@ -79,23 +81,23 @@ const AttendanceDashboard = () => {
       let aValue, bValue;
 
       switch (sortConfig.key) {
-        case 'teamName':
+        case "teamName":
           aValue = a.teamName.toLowerCase();
           bValue = b.teamName.toLowerCase();
           break;
-        case 'memberName':
-          aValue = a.userId?.name?.toLowerCase() || '';
-          bValue = b.userId?.name?.toLowerCase() || '';
+        case "memberName":
+          aValue = a.userId?.name?.toLowerCase() || "";
+          bValue = b.userId?.name?.toLowerCase() || "";
           break;
-        case 'checkIn':
-          aValue = a.checkIn?.time?.time || '';
-          bValue = b.checkIn?.time?.time || '';
+        case "checkIn":
+          aValue = a.checkIn?.time?.time || "";
+          bValue = b.checkIn?.time?.time || "";
           break;
         default:
           return 0;
       }
 
-      if (sortConfig.direction === 'ascending') {
+      if (sortConfig.direction === "ascending") {
         return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
       } else {
         return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
@@ -107,9 +109,11 @@ const AttendanceDashboard = () => {
     if (sortConfig.key !== key) {
       return <ChevronUp className="w-4 h-4 text-gray-400" />;
     }
-    return sortConfig.direction === 'ascending' ? 
-      <ChevronUp className="w-4 h-4 text-blue-500" /> : 
-      <ChevronDown className="w-4 h-4 text-blue-500" />;
+    return sortConfig.direction === "ascending" ? (
+      <ChevronUp className="w-4 h-4 text-blue-500" />
+    ) : (
+      <ChevronDown className="w-4 h-4 text-blue-500" />
+    );
   };
 
   return (
@@ -147,13 +151,15 @@ const AttendanceDashboard = () => {
                   <div className="bg-green-50 rounded-lg p-4">
                     <p className="text-sm text-gray-600">Present</p>
                     <p className="text-2xl font-bold text-green-600">
-                      {team.statistics.find((s) => s._id === "present")?.count || 0}
+                      {team.statistics.find((s) => s._id === "present")
+                        ?.count || 0}
                     </p>
                   </div>
                   <div className="bg-red-50 rounded-lg p-4">
                     <p className="text-sm text-gray-600">Absent</p>
                     <p className="text-2xl font-bold text-red-600">
-                      {team.statistics.find((s) => s._id === "absent")?.count || 0}
+                      {team.statistics.find((s) => s._id === "absent")?.count ||
+                        0}
                     </p>
                   </div>
                 </div>
@@ -170,31 +176,31 @@ const AttendanceDashboard = () => {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th 
+                    <th
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-                      onClick={() => handleSort('teamName')}
+                      onClick={() => handleSort("teamName")}
                     >
                       <div className="flex items-center space-x-1">
                         <span>Team</span>
-                        {getSortIcon('teamName')}
+                        {getSortIcon("teamName")}
                       </div>
                     </th>
-                    <th 
+                    <th
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-                      onClick={() => handleSort('memberName')}
+                      onClick={() => handleSort("memberName")}
                     >
                       <div className="flex items-center space-x-1">
                         <span>Member Name</span>
-                        {getSortIcon('memberName')}
+                        {getSortIcon("memberName")}
                       </div>
                     </th>
-                    <th 
+                    <th
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
-                      onClick={() => handleSort('checkIn')}
+                      onClick={() => handleSort("checkIn")}
                     >
                       <div className="flex items-center space-x-1">
                         <span>Check In</span>
-                        {getSortIcon('checkIn')}
+                        {getSortIcon("checkIn")}
                       </div>
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -207,12 +213,15 @@ const AttendanceDashboard = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {getSortedData().map((record, index) => (
-                    <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <tr
+                      key={index}
+                      className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                    >
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {record.teamName}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {record.userId?.name || 'N/A'}
+                        {record.userId?.name || "N/A"}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {formatTime(record.checkIn?.time?.time)}
@@ -221,14 +230,18 @@ const AttendanceDashboard = () => {
                         {formatTime(record.checkOut?.time?.time)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
-                          ${record.status === 'present' 
-                            ? 'bg-green-100 text-green-800'
-                            : record.status === 'absent'
-                            ? 'bg-red-100 text-red-800'
-                            : 'bg-gray-100 text-gray-800'
-                          }`}>
-                          {record.status?.charAt(0).toUpperCase() + record.status?.slice(1) || 'Unknown'}
+                        <span
+                          className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
+                          ${
+                            record.status === "present"
+                              ? "bg-green-100 text-green-800"
+                              : record.status === "absent"
+                              ? "bg-red-100 text-red-800"
+                              : "bg-gray-100 text-gray-800"
+                          }`}
+                        >
+                          {record.status?.charAt(0).toUpperCase() +
+                            record.status?.slice(1) || "Unknown"}
                         </span>
                       </td>
                     </tr>

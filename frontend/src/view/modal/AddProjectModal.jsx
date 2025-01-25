@@ -149,7 +149,7 @@ const AddProjectModal = ({ isOpen, onClose, onAddProject, clientId }) => {
             </div>
             <div className="w-full">
               <label className="block text-sm font-semibold mb-1">
-                Description (optional)
+                Description
               </label>
               <textarea
                 value={description}
