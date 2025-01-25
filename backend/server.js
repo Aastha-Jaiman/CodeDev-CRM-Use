@@ -1,8 +1,10 @@
+const dotenv = require("dotenv")
+dotenv.config()
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const colors = require("colors");
-const connectDB = require("./database/db");
+const connectDB = require("./database/db.js");
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const leadRouter = require("./routes/leadRoutes");
@@ -25,10 +27,8 @@ const taskRoutes = require("./routes/taskRoutes");
 const workReportRoutes = require("./routes/workReportsRoutes");
 const path = require("path");
 
-require("dotenv").config();
-
 const URL = process.env.DB_URL;
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 app.use(express.json());
@@ -69,7 +69,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-const GoogleStrategy = require("./possport");
+// const GoogleStrategy = require("./possport");
 
 app.use("/auth", googleAuth);
 app.use("/api/auth", authRoutes);
