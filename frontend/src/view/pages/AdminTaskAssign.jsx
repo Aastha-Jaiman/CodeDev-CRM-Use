@@ -91,9 +91,16 @@ const AdminTaskAssignmentForm = () => {
     }
   };
 
-  const handleEdit = (task) => {
-    setTaskData(task);
-  };
+  // const handleEdit = (task) => {
+  //   setTaskData(task);
+  // };
+const handleEdit = (task) => {
+  setTaskData({
+    ...task,
+    user: task.user?._id || "", // Set the user ID
+    currentDate: task.date ? new Date(task.date).toISOString().split("T")[0] : "", // Format the date
+  });
+};
 
   // Function to filter tasks based on the selected filter (All, Today, Tomorrow, etc.)
   const getFilteredTasks = () => {
